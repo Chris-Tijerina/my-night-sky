@@ -4,21 +4,19 @@ var longitude
 
 var findIss = function () {
     var issApi = "http://api.open-notify.org/iss-now.json";
-    var coords;
     // make the request 
     fetch(issApi).then(function (response) {
         if (response.ok) {
             //log the data
             response.json().then(function (data) {
                 var issLat = data.iss_position.latitude;
-                var issLon = data.iss_position.longitude;
-                coords = [issLat, issLon];
-                console.log(coords)
-                
+                var issLon = data.iss_position.longitude; 
+                console.log (data)
+                console.log (issLat)
+                console.log (issLon)
             });
         }
     });
-    return coords;
 };
 
 var mapMaker = function () {
@@ -35,11 +33,9 @@ var mapMaker = function () {
         accessToken: 'pk.eyJ1IjoiY2hyaXMtdGlqZXJpbmEiLCJhIjoiY2t3eTMzeDQyMGg4djJ1cXZhbTBybnh0MCJ9.8p4s1rao5HyWsSbPOO8slg'
     }).addTo(map);
 
-    var issCoord = findIss();
-    console.log(issCoord)
     // put marker on home position
     var markerHome = L.marker([latitude, longitude]).addTo(map);
-    // var markerIss = L.marker([issCoord[0], issCoord[1]]).addTo(map);
+    // put iss marker
 }
 
 // On click of button, run the geo location function
@@ -64,11 +60,12 @@ var geoLocation = function () {
     navigator.geolocation.getCurrentPosition(showPosition);
 }
 
-// get coordinates and display them
+// get coordinates
 var showPosition = function (position) {
     latitude = position.coords.latitude;
     longitude = position.coords.longitude;
-    $(".lat-lon").text("latitude" + latitude + "......\n" + "longitude" + longitude);
+    // $(".lat-lon").text("latitude" + latitude + "......\n" + "longitude" + longitude);
+    findIss();
     mapMaker();
 }
 
