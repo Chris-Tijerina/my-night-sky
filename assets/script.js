@@ -157,4 +157,6 @@ getPlanetInfo = function(latVar, lonVar) {
             })
         }
     })
+
+
 }
