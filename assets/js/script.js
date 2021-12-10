@@ -64,7 +64,6 @@ var geoLocation = function () {
 var showPosition = function (position) {
     latitude = position.coords.latitude;
     longitude = position.coords.longitude;
-    // $(".lat-lon").text("latitude" + latitude + "......\n" + "longitude" + longitude);
     findIss();
     mapMaker();
 }
