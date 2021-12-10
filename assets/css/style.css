@@ -1,0 +1,62 @@
+*{
+    color: white;
+}
+
+body{
+    background-color: rgba(126, 118, 118, 0.692);
+}
+
+/* hero space TBD with image*/
+.hero{
+    background-color: black;
+    text-align: center;
+}
+
+.hero h1{
+    color:rgb(172, 166, 166);
+}
+
+/* opening description */
+.description{
+    text-align: center;
+    margin: 20px;
+    font-size: 1.3rem;
+}
+
+/* containers holding all the info */
+#all-the-goodies{
+    margin-top: 10px;
+    margin-right: 5%;
+    flex-wrap: flex;
+}
+
+/* form container */
+.formCont{
+    margin-top: 2%;
+    margin-left: 5%;
+}
+
+form label{
+    font-size: 1.3rem;
+}
+
+.form-input{
+    display: block;
+    width: 80%;
+    padding: 5px 0 5px 5px;
+    font-size: 14px;
+    border-radius: .3rem;
+    font-size: 24px;
+}
+
+.sub-btn, .geoBtn{
+    margin: 5px 0;
+    padding: 6px 5px;
+    width: 80%;
+}
+/* end of form container */
+
+#map{
+    height: 600px;
+    width: 600px;
+}
