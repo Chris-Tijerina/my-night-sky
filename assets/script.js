@@ -37,8 +37,7 @@ getCityDetails = function(C) {
                 //Icon
                 let weatherIcon = data.weather[0].icon
                 let iconUrl = "http://openweathermap.org/img/wn/"+weatherIcon+".png";
-                $(".weather-icon").attr("src", iconUrl)
-
+                
                 //Second API request for more details
                 let getMoreCityDetails = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&units=imperial&appid=d310cdc3e7de424fc0047cf1fd72fd27"
                 fetch(getMoreCityDetails).then(function(response) {
@@ -48,9 +47,9 @@ getCityDetails = function(C) {
                             goodieDiv.textContent = ""
                             //Moon Phase
                             let moonPhase = moreData.daily[0].moon_phase
-
+                            
                             //daily.moon_phase Moon phase. 0 and 1 are 'new moon', 0.25 is 'first quarter moon', 0.5 is 'full moon' and 0.75 is 'last quarter moon'. The periods in between are called 'waxing crescent', 'waxing gibous', 'waning gibous', and 'waning crescent', respectively.
-
+                            
                             //Moonrise time
                             let moonRiseFullData = moreData.daily[0].moonrise
                             let moonRiseFullTime = new Date(moonRiseFullData * 1000)
@@ -63,23 +62,29 @@ getCityDetails = function(C) {
                             let moonSetHour = moonSetFullTime.getHours();
                             let moonSetMinute = moonSetFullTime.getMinutes()
                             console.log(moonSetHour + ":" + moonSetMinute)
-
+                            
                             weatherDiv = document.createElement("div")
                             weatherDiv.setAttribute("style", "border: 3px solid red")
                             goodieDiv.appendChild(weatherDiv)
+                            
+                            
+                            iconImg = document.createElement("img")
+                            $(iconImg).addClass("weather-icon")
 
                             pOne = document.createElement("p")
                             pTwo = document.createElement("p")
                             pThree = document.createElement("p")
                             pFour = document.createElement("p")
                             pFive = document.createElement("p")
-
+                            
                             pOne.textContent = "Your GPS coordanites: " + lat + "," + lon
                             pTwo.textContent = "Sunrise Time : " + sunRiseShowTime
                             pThree.textContent = "Sunset Time : "+ sunSetShowTime
                             pFour.textContent = "Cloud Information: " +cloudData
                             pFive.textContent = "Moon Phase: " + moonPhase
-
+                            
+                            weatherDiv.appendChild(iconImg)
+                            $(".weather-icon").attr("src", iconUrl)
                             weatherDiv.appendChild(pOne)
                             weatherDiv.appendChild(pTwo)
                             weatherDiv.appendChild(pThree)
@@ -88,9 +93,9 @@ getCityDetails = function(C) {
                             
                             
                             getPlanetInfo(lat, lon);
-
                             
-
+                            
+                            
                         })
                     }
                 })
