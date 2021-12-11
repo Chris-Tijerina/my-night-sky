@@ -1,9 +1,11 @@
+timeStampArray = JSON.parse(localStorage.getItem("My Night Sky"))
+
 var subBtn = document.getElementById("sub-btn")
 var cityInput = document.getElementById("city-finder")
 var goodieDiv = document.getElementById("all-the-goodies")
 
-getCityDetails = function(C) {
-    let getThoseDetails = "https://api.openweathermap.org/data/2.5/weather?q=" + C + "&units=imperial&appid=d310cdc3e7de424fc0047cf1fd72fd27";
+getCityDetails = function(CitySearch) {
+    let getThoseDetails = "https://api.openweathermap.org/data/2.5/weather?q=" + CitySearch + "&units=imperial&appid=6803214db5809206d0fa99b36f47790d";
     
     fetch(getThoseDetails).then(function(response){
         if(response.ok) {
@@ -20,9 +22,10 @@ getCityDetails = function(C) {
         }
     })
 }
+
 //Second API request for more details
-getMoreCityDetails =function(cityLat, cityLon) {
-    let getMoreDetails = "https://api.openweathermap.org/data/2.5/onecall?lat=" + cityLat + "&lon=" + cityLon + "&units=imperial&appid=d310cdc3e7de424fc0047cf1fd72fd27"
+getMoreCityDetails =function(Lat, Lon) {
+    let getMoreDetails = "https://api.openweathermap.org/data/2.5/onecall?lat=" + Lat + "&lon=" + Lon + "&units=imperial&appid=6803214db5809206d0fa99b36f47790d"
 
     fetch(getMoreDetails).then(function(response) {
 
@@ -30,6 +33,14 @@ getMoreCityDetails =function(cityLat, cityLon) {
             response.json().then(function(moreData) {
                 console.log(moreData)
                 goodieDiv.textContent = ""
+
+                //Time stamp
+                let timeStamp = moreData.current.dt
+                let theDate = new Date(timeStamp * 1000)
+                let timeStampHour = theDate.getHours()
+                let timeStampMinutes = theDate.getMinutes()
+                console.log(timeStampHour, timeStampMinutes)
+
 
                  //Sunrise time
                  let sunRiseTimeData = moreData.current.sunrise
@@ -86,7 +97,7 @@ getMoreCityDetails =function(cityLat, cityLon) {
                 pSix = document.createElement("p")
                 pSeven = document.createElement("p")
                                 
-                pOne.textContent = "Your GPS coordanites: " + cityLat + "," + cityLon
+                pOne.textContent = "Your GPS coordanites: " + Lat + "," + Lon
                 pTwo.textContent = "Sunrise Time : " + sunRiseShowTime
                 pThree.textContent = "Sunset Time : "+ sunSetShowTime
                 pFour.textContent = "Cloudiness: " + cloudData + " % "
@@ -102,9 +113,26 @@ getMoreCityDetails =function(cityLat, cityLon) {
                 weatherDiv.appendChild(pFour)
                 weatherDiv.appendChild(pFive)     
                 weatherDiv.appendChild(pSix)     
-                weatherDiv.appendChild(pSeven)     
+                weatherDiv.appendChild(pSeven)
                 
-                getPlanetInfo(cityLat, cityLon);
+                timeStampInfo = {
+                    searchTime: timeStampHour + ":" + timeStampMinutes,
+                    location: Lat + ", " + Lon
+                }
+                console.log(timeStampInfo)
+
+                if(timeStampArray == null) {
+                    timeStampArray = []
+                    timeStampArray.push(timeStampInfo)
+                    localStorage.setItem("My Night Sky", JSON.stringify(timeStampArray))
+                }
+                else{
+                    timeStampArray.push(timeStampInfo)
+                    localStorage.setItem("My Night Sky", JSON.stringify(timeStampArray))
+                }
+
+                
+                getPlanetInfo(Lat, Lon);
             })
         }
     })
@@ -129,12 +157,16 @@ getPlanetInfo = function(latVar, lonVar) {
                     let planetRiseSeconds= planets[i].rightAscension.seconds
 
                     let planetHorizon = planets[i].aboveHorizon
+
+                    if(planetHorizon == true) {
+                        pHorizon = planetName + " Is currently above the Horizon."
+                    }
                   
                     h2El = document.createElement("h2")
                     p2El = document.createElement("p")
                     
                     h2El.textContent = "Planet Name: " + planetName
-                    p2El.textContent = "Above Horizon : " + planetHorizon
+                    p2El.textContent = pHorizon
 
                     planetDiv.appendChild(h2El)
                     planetDiv.appendChild(p2El)
