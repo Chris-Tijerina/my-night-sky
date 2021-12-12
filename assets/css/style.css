@@ -8,14 +8,18 @@ body{
 
 /* hero space TBD with image*/
 .hero{
-    background-color: rgb(9, 10, 10);
+    background-color: rgb(10, 10, 10);
     text-align: center;
+    overflow: hidden;
 }
 
 .hero h1{
     color:rgb(172, 166, 166);
 }
+.hero-body {
+    margin: 25px 50px 75px;
 
+}
 /* opening description */
 .description{
     text-align: center;
@@ -53,6 +57,7 @@ form label{
     margin: 5px 0;
     padding: 6px 5px;
     width: 80%;
+    background-color: rgb(34, 34, 36);
 }
 /* end of form container */
 
