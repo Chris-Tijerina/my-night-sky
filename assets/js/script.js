@@ -17,9 +17,9 @@ function getCityDetails (CitySearch) {
                 let cityLat = data.coord.lat
                 let cityLon = data.coord.lon
         
-                // getMoreCityDetails(cityLat, cityLon)
-                showPosition();
-                // getPlanetInfo(cityLat, cityLon);
+                getMoreCityDetails(cityLat, cityLon)
+                // showPosition();
+                // getPlanetInfo(cityLatgit , cityLon);
             }) 
             
         }
@@ -133,7 +133,6 @@ function getMoreCityDetails(Lat, Lon) {
                     localStorage.setItem("My Night Sky", JSON.stringify(timeStampArray))
                 }
                 
-                console.log(moonPhase)
                 moonDiv.textContent = ""
                 if(moonPhase > 0 && moonPhase < .25) {
                     pFive.textContent = "Moon Phase: " + "Waxing Crestcent";
@@ -165,7 +164,6 @@ function getMoreCityDetails(Lat, Lon) {
                     moonDiv.appendChild(pFive)
                 }
 
-                
                 else if(moonPhase == .75){
                     pFive.textContent = "Moon Phase: " + "Last Quarter Moon"
                     console.log(pFive)
@@ -183,10 +181,6 @@ function getMoreCityDetails(Lat, Lon) {
                     console.log(pFive)
                     moonDiv.appendChild(pFive)
                 }
-
-                
-                // console.log(pFive)
-                // moonDiv.appendChild(pFive)     
                 
                 getPlanetInfo(Lat, Lon);
             })
@@ -310,7 +304,7 @@ function geoCheck() {
 function showPosition(position) {
     latitude = position.coords.latitude;
     longitude = position.coords.longitude;
-    // getMoreCityDetails(latitude, longitude)
+    getMoreCityDetails(latitude, longitude)
     findIss();
     mapMaker();
 }
