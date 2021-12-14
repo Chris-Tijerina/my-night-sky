@@ -1,5 +1,6 @@
 *{
     color: white;
+    font-family: monospace, "Lucida Console", "Courier New";
 }
 
 body{
@@ -67,6 +68,7 @@ form label{
     padding: 6px 5px;
     width: 80%;
     background-color: rgb(34, 34, 36);
+    border-radius: 4px;
 }
 /* end of form container */
 
@@ -76,9 +78,9 @@ form label{
 }
 
 footer {
-    text-size-adjust: 100px;
     
-
+    height: 1px;
+    
 }
 
 @media (max-width: 100px) {
