@@ -17,9 +17,9 @@ function getCityDetails (CitySearch) {
                 let cityLat = data.coord.lat
                 let cityLon = data.coord.lon
         
-                // getMoreCityDetails(cityLat, cityLon)
-                showPosition();
-                // getPlanetInfo(cityLat, cityLon);
+                getMoreCityDetails(cityLat, cityLon)
+                // showPosition();
+                // getPlanetInfo(cityLatgit , cityLon);
             }) 
             
         }
@@ -304,7 +304,7 @@ function geoCheck() {
 function showPosition(position) {
     latitude = position.coords.latitude;
     longitude = position.coords.longitude;
-    // getMoreCityDetails(latitude, longitude)
+    getMoreCityDetails(latitude, longitude)
     findIss();
     mapMaker();
 }
