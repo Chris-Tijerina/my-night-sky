@@ -18,14 +18,14 @@ body{
 
 .hero h1{
     display: flex;
-    padding: 0 0 600px 0;
+    padding: 0 0 200px 0;
     position: absolute;
     top: 50%; 
     right: 50%;
     transform: translate(50%,-50%);
     text-transform: uppercase;
     font-family: verdana;
-    font-size: 5em;
+    font-size: 3em;
     font-weight: 200;
     color: #f5f5f5;
     text-shadow: 1px 1px 1px #919191,
@@ -44,10 +44,6 @@ body{
     1px 30px 60px rgba(16,16,16,0.4);
 }
 
-.hero-body {
-    margin: 25px 50px 75px;
-
-}
 /* opening description */
 .description{
     text-align: center;
@@ -93,3 +89,9 @@ form label{
     height: 600px;
     width: 600px;
 }
+
+@media screen and (min-width: 1280px) {
+    .hero h1 {
+      padding: 0 0 500px 0;
+    }
+  }
