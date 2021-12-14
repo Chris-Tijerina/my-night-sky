@@ -10,7 +10,10 @@ body{
 .hero{
     background-color: rgb(10, 10, 10);
     text-align: center;
-    overflow: hidden;
+    background-image: url("../images/negative-space-moon-craters.jpg");
+    background-position: center;
+    background-size: cover;
+    height: 800px;
 }
 
 .hero h1{
