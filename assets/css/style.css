@@ -60,3 +60,9 @@ form label{
     height: 600px;
     width: 600px;
 }
+
+/* resizes the moon icon */
+.moonIcon{
+    height: 212px;
+    width: 212px;
+}
