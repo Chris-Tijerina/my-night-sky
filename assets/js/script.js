@@ -2,9 +2,11 @@ timeStampArray = JSON.parse(localStorage.getItem("My Night Sky"))
 
 var subBtn = document.getElementById("sub-btn")
 var cityInput = document.getElementById("city-finder")
-var goodieDiv = document.getElementById("all-the-goodies")
+var weatherInfoDiv = document.getElementById("weatherInfo")
+var sunMoonDiv = document.getElementById("sunMoon")
+var moonDiv = document.getElementById("moonLocation")
 
-getCityDetails = function(CitySearch) {
+function getCityDetails (CitySearch) {
     let getThoseDetails = "https://api.openweathermap.org/data/2.5/weather?q=" + CitySearch + "&units=imperial&appid=6803214db5809206d0fa99b36f47790d";
     
     fetch(getThoseDetails).then(function(response){
@@ -16,7 +18,8 @@ getCityDetails = function(CitySearch) {
                 let cityLon = data.coord.lon
         
                 getMoreCityDetails(cityLat, cityLon)
-                // getPlanetInfo(cityLat, cityLon);
+                // showPosition();
+                // getPlanetInfo(cityLatgit , cityLon);
             }) 
             
         }
@@ -24,7 +27,7 @@ getCityDetails = function(CitySearch) {
 }
 
 //Second API request for more details
-getMoreCityDetails =function(Lat, Lon) {
+function getMoreCityDetails(Lat, Lon) {
     let getMoreDetails = "https://api.openweathermap.org/data/2.5/onecall?lat=" + Lat + "&lon=" + Lon + "&units=imperial&appid=6803214db5809206d0fa99b36f47790d"
 
     fetch(getMoreDetails).then(function(response) {
@@ -32,42 +35,42 @@ getMoreCityDetails =function(Lat, Lon) {
         if(response.ok) {
             response.json().then(function(moreData) {
                 console.log(moreData)
-                goodieDiv.textContent = ""
-
+                weatherInfoDiv.textContent = ""
+                
                 //Time stamp
                 let timeStamp = moreData.current.dt
                 let theDate = new Date(timeStamp * 1000)
                 let timeStampHour = theDate.getHours()
                 let timeStampMinutes = theDate.getMinutes()
                 console.log(timeStampHour, timeStampMinutes)
-
-
-                 //Sunrise time
-                 let sunRiseTimeData = moreData.current.sunrise
-                 let sunRiseFullTime = new Date(sunRiseTimeData * 1000)
-                 let sunRiseTimeHour = sunRiseFullTime.getHours()
-                 let sunRiseTimeMinute = sunRiseFullTime.getMinutes()
-                 let sunRiseShowTime = sunRiseTimeHour + ":" +sunRiseTimeMinute
-                 
-                 //Sunset time
-                 let sunSetTimeData = moreData.current.sunset
-                 let sunSetFullTime = new Date(sunSetTimeData * 1000)
-                 let sunSetTimeHour = sunSetFullTime.getHours()
-                 let sunSetTimeMinute = sunSetFullTime.getMinutes()
-                 let sunSetShowTime = sunSetTimeHour + ":" +sunSetTimeMinute
- 
-                 //Clouds Info
-                 let cloudData = moreData.current.clouds
-                 
-                 //Icon
-                 let weatherIcon = moreData.current.weather[0].icon
-                 let iconUrl = "http://openweathermap.org/img/wn/"+weatherIcon+".png";
-                                
+                
+                
+                //Sunrise time
+                let sunRiseTimeData = moreData.current.sunrise
+                let sunRiseFullTime = new Date(sunRiseTimeData * 1000)
+                let sunRiseTimeHour = sunRiseFullTime.getHours()
+                let sunRiseTimeMinute = sunRiseFullTime.getMinutes()
+                let sunRiseShowTime = sunRiseTimeHour + ":" +sunRiseTimeMinute
+                
+                //Sunset time
+                let sunSetTimeData = moreData.current.sunset
+                let sunSetFullTime = new Date(sunSetTimeData * 1000)
+                let sunSetTimeHour = sunSetFullTime.getHours()
+                let sunSetTimeMinute = sunSetFullTime.getMinutes()
+                let sunSetShowTime = sunSetTimeHour + ":" +sunSetTimeMinute
+                
+                //Clouds Info
+                let cloudData = moreData.current.clouds
+                
+                //Icon
+                let weatherIcon = moreData.current.weather[0].icon
+                let iconUrl = "http://openweathermap.org/img/wn/"+weatherIcon+".png";
+                
                 //Moon Phase
                 let moonPhase = moreData.daily[0].moon_phase
-                                
+                
                 //daily.moon_phase Moon phase. 0 and 1 are 'new moon', 0.25 is 'first quarter moon', 0.5 is 'full moon' and 0.75 is 'last quarter moon'. The periods in between are called 'waxing crescent', 'waxing gibous', 'waning gibous', and 'waning crescent', respectively.
-                                
+                
                 //Moonrise time
                 let moonRiseFullData = moreData.daily[0].moonrise
                 let moonRiseFullTime = new Date(moonRiseFullData * 1000)
@@ -81,14 +84,14 @@ getMoreCityDetails =function(Lat, Lon) {
                 let moonSetHour = moonSetFullTime.getHours();
                 let moonSetMinute = moonSetFullTime.getMinutes()
                 let moonSetShowTime = moonSetHour + ":" + moonSetMinute
-                                
+                
                 weatherDiv = document.createElement("div")
                 weatherDiv.setAttribute("style", "border: 3px solid red")
-                goodieDiv.appendChild(weatherDiv)
-                                              
+                weatherInfoDiv.appendChild(weatherDiv)
+                
                 iconImg = document.createElement("img")
                 $(iconImg).addClass("weather-icon")
-
+                
                 pOne = document.createElement("p")
                 pTwo = document.createElement("p")
                 pThree = document.createElement("p")
@@ -96,22 +99,20 @@ getMoreCityDetails =function(Lat, Lon) {
                 pFive = document.createElement("p")
                 pSix = document.createElement("p")
                 pSeven = document.createElement("p")
-                                
+                
                 pOne.textContent = "Your GPS coordanites: " + Lat + "," + Lon
                 pTwo.textContent = "Sunrise Time : " + sunRiseShowTime
                 pThree.textContent = "Sunset Time : "+ sunSetShowTime
                 pFour.textContent = "Cloudiness: " + cloudData + " % "
-                pFive.textContent = "Moon Phase: " + moonPhase
                 pSix.textContent = "Moonrise: " + moonRiseShowTime
                 pSeven.textContent = "Moonset: " + moonSetShowTime
-                                
+                
                 weatherDiv.appendChild(iconImg)
                 $(".weather-icon").attr("src", iconUrl)
                 weatherDiv.appendChild(pOne)
                 weatherDiv.appendChild(pTwo)
                 weatherDiv.appendChild(pThree)
                 weatherDiv.appendChild(pFour)
-                weatherDiv.appendChild(pFive)     
                 weatherDiv.appendChild(pSix)     
                 weatherDiv.appendChild(pSeven)
                 
@@ -120,7 +121,8 @@ getMoreCityDetails =function(Lat, Lon) {
                     location: Lat + ", " + Lon
                 }
                 console.log(timeStampInfo)
-
+                
+                
                 if(timeStampArray == null) {
                     timeStampArray = []
                     timeStampArray.push(timeStampInfo)
@@ -130,7 +132,55 @@ getMoreCityDetails =function(Lat, Lon) {
                     timeStampArray.push(timeStampInfo)
                     localStorage.setItem("My Night Sky", JSON.stringify(timeStampArray))
                 }
+                
+                moonDiv.textContent = ""
+                if(moonPhase > 0 && moonPhase < .25) {
+                    pFive.textContent = "Moon Phase: " + "Waxing Crestcent";
+                    console.log(pFive)
+                    moonDiv.appendChild(pFive)
+                }
 
+                else if(moonPhase == .25) {
+                    pFive.textContent = "Moon Phase: " + "First Quarter Moon"
+                    console.log(pFive)
+                    moonDiv.appendChild(pFive)
+                }
+
+                else if(moonPhase > .25 && moonPhase < .50) {
+                    pFive.textContent = "Moon Phase: " + "Waxing Gibous"
+                    console.log(pFive)
+                    moonDiv.appendChild(pFive)
+                }
+
+                else if(moonPhase == .50) {
+                    pFive.textContent = "Moon Phase: " + "First Full Moon"
+                    console.log(pFive)
+                    moonDiv.appendChild(pFive)
+                }
+
+                else if(moonPhase > .50 && moonPhase < .75) {
+                    pFive.textContent = "Moon Phase: " + "Waning Gibous"
+                    console.log(pFive)
+                    moonDiv.appendChild(pFive)
+                }
+
+                else if(moonPhase == .75){
+                    pFive.textContent = "Moon Phase: " + "Last Quarter Moon"
+                    console.log(pFive)
+                    moonDiv.appendChild(pFive)
+                }
+
+                else if( moonPhase > .75 && moonPhase < 1 ) {
+                    pFive.textContent = "Moon Phase: " + "Waning Crescent"
+                    console.log(pFive)
+                    moonDiv.appendChild(pFive)
+                }
+
+                else if( moonPhase == 0 || moonPhase == 1){
+                    pFive.textContent = "Moon Phase: " + "New Moon"
+                    console.log(pFive)
+                    moonDiv.appendChild(pFive)
+                }
                 
                 getPlanetInfo(Lat, Lon);
             })
@@ -138,16 +188,18 @@ getMoreCityDetails =function(Lat, Lon) {
     })
 }
 
-getPlanetInfo = function(latVar, lonVar) {
+function getPlanetInfo(latVar, lonVar) {
     let planetInfo = "https://visible-planets-api.herokuapp.com/v2?latitude="+latVar+"&longitude="+lonVar+"&showCoords=true"
-
+    
     fetch(planetInfo).then(function(response) {
         if(response.ok) {
             response.json().then(function(planetData) {
+                sunMoonDiv.textContent = ""
+
                 var planets = planetData.data
                 console.log(planets)
                 planetDiv = document.createElement("div")
-                goodieDiv.appendChild(planetDiv)
+                sunMoonDiv.appendChild(planetDiv)
                 planetDiv.setAttribute("style", "border: 3px solid black;")
                 
                 for(i=0;i<planets.length; i++) {
@@ -190,7 +242,7 @@ subBtn.addEventListener("click", function(event) {
 var latitude
 var longitude
 
-var findIss = function () {
+function findIss() {
     var issApi = "http://api.open-notify.org/iss-now.json";
     // make the request 
     fetch(issApi).then(function (response) {
@@ -207,7 +259,7 @@ var findIss = function () {
     });
 };
 
-var mapMaker = function () {
+function mapMaker() {
     //create map
     var map = L.map('map').setView([latitude, longitude], 13);
 
@@ -232,7 +284,7 @@ $(".geoBtn").on("click", function () {
 })
 
 // check whether or not geolocation is available for the user
-var geoCheck = function () {
+function geoCheck() {
     if ('geolocation' in navigator) {
         console.log("location is available")
         // if geolocation is available, get current position from navigator
@@ -244,12 +296,12 @@ var geoCheck = function () {
 }
 
 // get current position from navigator
-var geoLocation = function () {
+ function geoLocation () {
     navigator.geolocation.getCurrentPosition(showPosition);
 }
 
 // get coordinates
-var showPosition = function (position) {
+function showPosition(position) {
     latitude = position.coords.latitude;
     longitude = position.coords.longitude;
     getMoreCityDetails(latitude, longitude)
