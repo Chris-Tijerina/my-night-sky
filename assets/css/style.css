@@ -41,6 +41,10 @@ body{
     flex-wrap: flex;
 }
 
+#weatherInfo, #sunMoon, #moonLocation {
+    padding: 20px 20px 20px 20px;
+}
+
 /* form container */
 .formCont{
     margin-top: 2%;
@@ -48,7 +52,7 @@ body{
 }
 
 form label{
-    font-size: 1.3rem;
+    font-size: 1.1rem;
     text-shadow: 2px 2px 5px black;
 
 }
