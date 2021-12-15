@@ -268,7 +268,7 @@ subBtn.addEventListener("click", function (event) {
 })
 
 function findIss() {
-    var issApi = "https://api.open-notify.org/iss-now.json";
+    var issApi = "http://api.open-notify.org/iss-now.json";
     // make the request 
     fetch(issApi).then(function (response) {
         if (response.ok) {
