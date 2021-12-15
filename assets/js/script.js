@@ -268,17 +268,16 @@ subBtn.addEventListener("click", function (event) {
 })
 
 function findIss() {
-    var issApi = "https://api.open-notify.org/iss-now.json";
+    var issApi = "https://api.wheretheiss.at/v1/satellites/25544";
     // make the request 
     fetch(issApi).then(function (response) {
         if (response.ok) {
             //log the data
             response.json().then(function (data) {
-                issLat = data.iss_position.latitude;
-                issLon = data.iss_position.longitude;
                 console.log(data)
-                console.log(issLat)
-                console.log(issLon)
+                issLat = data.latitude;
+                issLon = data.longitude;
+            
             })
                 .then(function (data) {
                     mapMaker()
