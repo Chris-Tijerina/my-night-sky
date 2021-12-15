@@ -137,54 +137,80 @@ function getMoreCityDetails(Lat, Lon) {
                     timeStampArray.push(timeStampInfo)
                     localStorage.setItem("My Night Sky", JSON.stringify(timeStampArray))
                 }
-
-                moonDiv.textContent = ""
-                if (moonPhase > 0 && moonPhase < .25) {
-                    pFive.textContent = "Moon Phase: " + "Waxing Crestcent";
+                
+                moonDiv.textContent = "";
+                var moonIcon = document.createElement("img");
+                moonIcon.className = 'moonIcon';
+                if(moonPhase > 0 && moonPhase < .25) {
+                    pFive.textContent = "Moon Phase: " + "Waxing Crescent";
+                    moonIcon.setAttribute("src", "./assets/images/waxingcrescenticon.png"); 
+                    moonIcon.setAttribute("alt", "Waxing Crescent moon");
                     console.log(pFive)
                     moonDiv.appendChild(pFive)
+                    moonDiv.appendChild(moonIcon);
                 }
 
-                else if (moonPhase == .25) {
-                    pFive.textContent = "Moon Phase: " + "First Quarter Moon"
+                else if(moonPhase == .25) {
+                    pFive.textContent = "Moon Phase: " + "First Quarter Moon";
+                    moonIcon.setAttribute("src", "./assets/images/firstquartericon.png"); 
+                    moonIcon.setAttribute("alt", "First Quarter moon");
                     console.log(pFive)
                     moonDiv.appendChild(pFive)
+                    moonDiv.appendChild(moonicon);
                 }
 
                 else if (moonPhase > .25 && moonPhase < .50) {
                     pFive.textContent = "Moon Phase: " + "Waxing Gibous"
+                    moonIcon.setAttribute("src", "./assets/images/waxinggibousicon.png"); 
+                    moonIcon.setAttribute("alt", "waxing gibous moon");
                     console.log(pFive)
                     moonDiv.appendChild(pFive)
+                    moonDiv.appendChild(moonIcon);
                 }
 
                 else if (moonPhase == .50) {
                     pFive.textContent = "Moon Phase: " + "First Full Moon"
+                    moonIcon.setAttribute("src", "./assets/images/fullmoonicon.png"); 
+                    moonIcon.setAttribute("alt", "First Full moon");
                     console.log(pFive)
                     moonDiv.appendChild(pFive)
+                    moonDiv.appendChild(moonIcon);
                 }
 
-                else if (moonPhase > .50 && moonPhase < .75) {
-                    pFive.textContent = "Moon Phase: " + "Waning Gibous"
+                else if(moonPhase > .50 && moonPhase < .75) {
+                    pFive.textContent = "Moon Phase: " + "Waning Gibous";
+                    moonIcon.setAttribute("src", "./assets/images/waninggibousicon.png"); 
+                    moonIcon.setAttribute("alt", "Waning Gibous moon");
                     console.log(pFive)
                     moonDiv.appendChild(pFive)
+                    moonDiv.appendChild(moonIcon);
                 }
 
-                else if (moonPhase == .75) {
-                    pFive.textContent = "Moon Phase: " + "Last Quarter Moon"
+                else if(moonPhase == .75){
+                    pFive.textContent = "Moon Phase: " + "Last Quarter Moon";
+                    moonIcon.setAttribute("src", "./assets/images/lastquartericon.png"); 
+                    moonIcon.setAttribute("alt", "Last Quarter moon");
                     console.log(pFive)
                     moonDiv.appendChild(pFive)
+                    moonDiv.appendChild(moonIcon);
                 }
 
-                else if (moonPhase > .75 && moonPhase < 1) {
-                    pFive.textContent = "Moon Phase: " + "Waning Crescent"
+                else if( moonPhase > .75 && moonPhase < 1 ) {
+                    pFive.textContent = "Moon Phase: " + "Waning Crescent";
+                    moonIcon.setAttribute("src", "./assets/images/waningcrescenticon.png"); 
+                    moonIcon.setAttribute("alt", "Waning Crescent moon");
                     console.log(pFive)
                     moonDiv.appendChild(pFive)
+                    moonDiv.appendChild(moonIcon);
                 }
 
-                else if (moonPhase == 0 || moonPhase == 1) {
-                    pFive.textContent = "Moon Phase: " + "New Moon"
+                else if( moonPhase == 0 || moonPhase == 1){
+                    pFive.textContent = "Moon Phase: " + "New Moon";
+                    moonIcon.setAttribute("src", "./assets/images/newmoonicon.png"); 
+                    moonIcon.setAttribute("alt", "New Moon moon");
                     console.log(pFive)
-                    moonDiv.appendChild(pFive)
+                    moonDiv.appendChild(pFive);
+                    moonDiv.appendChild(moonIcon);
                 }
 
                 getPlanetInfo(Lat, Lon);
