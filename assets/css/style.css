@@ -90,4 +90,5 @@ footer {
 @media (max-width: 100px) {
     .hero h1 {
         padding: 0 0 300px 0;
+    }
 }
