@@ -144,7 +144,7 @@ function getMoreCityDetails(Lat, Lon) {
                 if(moonPhase > 0 && moonPhase < .25) {
                     pFive.textContent = "Moon Phase: " + "Waxing Crescent";
                     moonIcon.setAttribute("src", "./assets/images/waxingcrescenticon.png"); 
-                    moonIcon.setAttribute("alt", "Waxing Crescent moon");
+                    moonIcon.setAttribute("alt", "Waxing Crescent Moon");
                     console.log(pFive)
                     moonDiv.appendChild(pFive)
                     moonDiv.appendChild(moonIcon);
@@ -153,7 +153,7 @@ function getMoreCityDetails(Lat, Lon) {
                 else if(moonPhase == .25) {
                     pFive.textContent = "Moon Phase: " + "First Quarter Moon";
                     moonIcon.setAttribute("src", "./assets/images/firstquartericon.png"); 
-                    moonIcon.setAttribute("alt", "First Quarter moon");
+                    moonIcon.setAttribute("alt", "First Quarter Moon");
                     console.log(pFive)
                     moonDiv.appendChild(pFive)
                     moonDiv.appendChild(moonicon);
@@ -268,7 +268,7 @@ subBtn.addEventListener("click", function (event) {
 })
 
 function findIss() {
-    var issApi = "http://api.open-notify.org/iss-now.json";
+    var issApi = "https://api.open-notify.org/iss-now.json";
     // make the request 
     fetch(issApi).then(function (response) {
         if (response.ok) {
