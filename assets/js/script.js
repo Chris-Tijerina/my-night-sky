@@ -69,7 +69,7 @@ function getMoreCityDetails(Lat, Lon) {
 
                 //Icon
                 let weatherIcon = moreData.current.weather[0].icon
-                let iconUrl = "http://openweathermap.org/img/wn/" + weatherIcon + ".png";
+                let iconUrl = "https://openweathermap.org/img/wn/" + weatherIcon + ".png";
 
                 //Moon Phase
                 let moonPhase = moreData.daily[0].moon_phase
