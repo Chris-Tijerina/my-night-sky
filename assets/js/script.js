@@ -5,6 +5,7 @@ var cityInput = document.getElementById("city-finder")
 var weatherInfoDiv = document.getElementById("weatherInfo")
 var sunMoonDiv = document.getElementById("sunMoon")
 var moonDiv = document.getElementById("moonLocation")
+var cityName;
 var latitude;
 var longitude;
 var issLat;
@@ -21,6 +22,7 @@ var homeIcon = L.icon({
 })
 findIss();
 setInterval(findIss, 5000);
+previousCities();
 
 // pull iss location from API 
 function findIss() {
@@ -52,7 +54,7 @@ function findIss() {
                     if (!corner1) {
                         bounds = L.latLngBounds(corner2, corner2);
                     }
-                    map.fitBounds(bounds,[10, 10])
+                    map.fitBounds(bounds, [10, 10])
 
                 });
         }
@@ -75,6 +77,23 @@ function mapInitializer() {
         accessToken: 'pk.eyJ1IjoiY2hyaXMtdGlqZXJpbmEiLCJhIjoiY2t3eTMzeDQyMGg4djJ1cXZhbTBybnh0MCJ9.8p4s1rao5HyWsSbPOO8slg'
     }).addTo(map);
 }
+
+// load search history on page load 
+function previousCities() {
+    if (localStorage.getItem("searchHistory")) {
+        var cityHistory = JSON.parse(localStorage.getItem("searchHistory"))
+        console.log(cityHistory)
+        $("#previous-searches").empty();
+        for (var i = cityHistory.length - 1; i >= 0; i--) {
+            var historyButton = $("<button type='button'>")
+                .addClass("historyButton")
+                .text(cityHistory[i])
+                .appendTo("#previous-searches")
+                .bind("click", historyButtonClick)
+        }
+    }
+}
+
 
 function getCityDetails(CitySearch) {
     let getThoseDetails = "https://api.openweathermap.org/data/2.5/weather?q=" + CitySearch + "&units=imperial&appid=6803214db5809206d0fa99b36f47790d";
@@ -325,12 +344,46 @@ function getPlanetInfo(latVar, lonVar) {
 }
 
 subBtn.addEventListener("click", function (event) {
-    event.preventDefault()
-    var cityName = cityInput.value
-    console.log(cityName)
-
-    getCityDetails(cityName)
+    event.preventDefault();
+    cityName = cityInput.value
+    console.log(cityName);
+    getCityDetails(cityName);
+    setSearchHistory();
+    previousCities();
 })
+
+function historyButtonClick() {
+    event.preventDefault();
+    cityName = $(this).text()
+    console.log(cityName);
+    getCityDetails(cityName);
+    setSearchHistory();
+    previousCities();
+}
+
+// save the names of any searched cities to an array
+function setSearchHistory() {
+
+    var searchHistory = new Array();
+
+    // Check local storage array for any previous data
+    if (localStorage.getItem("searchHistory")) {
+        var storageSearchHistory = localStorage.getItem("searchHistory")
+        searchHistory = searchHistory.concat(JSON.parse(storageSearchHistory))
+    }
+    // cut off the list at some length
+    if (searchHistory.length >= 8) {
+        searchHistory.shift()
+    }
+    // add the current value to the array
+    searchHistory.push(cityName)
+
+    // save the array to the local storage
+    localStorage.setItem("searchHistory", JSON.stringify(searchHistory))
+    console.log(searchHistory)
+}
+
+
 
 function mapMaker() {
     if (homeMarker) {
@@ -368,3 +421,4 @@ function showPosition(position) {
     getMoreCityDetails(latitude, longitude)
     mapMaker();
 }
+

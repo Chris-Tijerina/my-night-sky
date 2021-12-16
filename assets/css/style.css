@@ -63,12 +63,16 @@ form label{
     color:rgb(10, 10, 10);
 }
 
-.sub-btn, .geoBtn{
+.sub-btn, .geoBtn, .historyButton{
     margin: 5px 0;
     padding: 6px 5px;
     width: 80%;
     background-color: rgb(34, 34, 36);
     border-radius: 4px;
+}
+
+.historyButton{
+    background-color: rgb(102, 102, 102);
 }
 /* end of form container */
 
