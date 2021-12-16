@@ -5,11 +5,76 @@ var cityInput = document.getElementById("city-finder")
 var weatherInfoDiv = document.getElementById("weatherInfo")
 var sunMoonDiv = document.getElementById("sunMoon")
 var moonDiv = document.getElementById("moonLocation")
-// lat-lon variables
 var latitude;
 var longitude;
 var issLat;
 var issLon;
+var map;
+var homeMarker;
+var issMarker;
+var issIcon = L.icon({
+    iconUrl: "./assets/images/international-space-station.png"
+})
+var homeIcon = L.icon({
+    iconUrl: "./assets/images/standing-up-man-.png",
+    iconAnchor: [5, 10],
+})
+findIss();
+setInterval(findIss, 5000);
+
+// pull iss location from API 
+function findIss() {
+    var issApi = "https://api.wheretheiss.at/v1/satellites/25544";
+    // make the request 
+    fetch(issApi).then(function (response) {
+        if (response.ok) {
+            //log the data
+            response.json().then(function (data) {
+                issLat = data.latitude;
+                issLon = data.longitude;
+
+            })
+
+                // clear iss marker and put new marker
+                .then(function (data) {
+                    if (!map) {
+                        mapInitializer()
+                    }
+                    if (issMarker) {
+                        map.removeLayer(issMarker);
+                    }
+                    issMarker = L.marker([issLat, issLon], { icon: issIcon }).addTo(map);
+
+                    // set bounds of map
+                    var corner1 = L.latLng(latitude, longitude),
+                        corner2 = L.latLng(issLat, issLon),
+                        bounds = L.latLngBounds(corner1, corner2);
+                    if (!corner1) {
+                        bounds = L.latLngBounds(corner2, corner2);
+                    }
+                    map.fitBounds(bounds,[10, 10])
+
+                });
+        }
+    });
+};
+
+
+// create the map on page load
+function mapInitializer() {
+    map = L.map('map').setView([issLat, issLon], 13);
+
+    // add layers to the map
+    L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+        minZoom: 1,
+        maxZoom: 20,
+        id: 'mapbox/streets-v11',
+        tileSize: 512,
+        zoomOffset: -1,
+        accessToken: 'pk.eyJ1IjoiY2hyaXMtdGlqZXJpbmEiLCJhIjoiY2t3eTMzeDQyMGg4djJ1cXZhbTBybnh0MCJ9.8p4s1rao5HyWsSbPOO8slg'
+    }).addTo(map);
+}
 
 function getCityDetails(CitySearch) {
     let getThoseDetails = "https://api.openweathermap.org/data/2.5/weather?q=" + CitySearch + "&units=imperial&appid=6803214db5809206d0fa99b36f47790d";
@@ -23,7 +88,7 @@ function getCityDetails(CitySearch) {
                 longitude = data.coord.lon
 
                 getMoreCityDetails(latitude, longitude)
-                findIss();
+                mapMaker();
 
             })
 
@@ -91,6 +156,7 @@ function getMoreCityDetails(Lat, Lon) {
                 let moonSetShowTime = moonSetHour + ":" + moonSetMinute
 
                 weatherDiv = document.createElement("div")
+                weatherDiv.setAttribute("style", "border: 3px solid red")
                 weatherInfoDiv.appendChild(weatherDiv)
 
                 iconImg = document.createElement("img")
@@ -104,7 +170,7 @@ function getMoreCityDetails(Lat, Lon) {
                 pSix = document.createElement("p")
                 pSeven = document.createElement("p")
 
-                pOne.textContent = "Your GPS coordanites: " + Lat + "," + Lon
+                pOne.textContent = "Your GPS Coordinates: " + Lat + "," + Lon
                 pTwo.textContent = "Sunrise Time : " + sunRiseShowTime
                 pThree.textContent = "Sunset Time : " + sunSetShowTime
                 pFour.textContent = "Cloudiness: " + cloudData + " % "
@@ -136,23 +202,23 @@ function getMoreCityDetails(Lat, Lon) {
                     timeStampArray.push(timeStampInfo)
                     localStorage.setItem("My Night Sky", JSON.stringify(timeStampArray))
                 }
-                
+
                 moonDiv.textContent = "";
                 var moonIcon = document.createElement("img");
                 moonIcon.className = 'moonIcon';
-                if(moonPhase > 0 && moonPhase < .25) {
+                if (moonPhase > 0 && moonPhase < .25) {
                     pFive.textContent = "Moon Phase: " + "Waxing Crescent";
-                    moonIcon.setAttribute("src", "./assets/images/waxingcrescenticon.png"); 
-                    moonIcon.setAttribute("alt", "Waxing Crescent moon");
+                    moonIcon.setAttribute("src", "./assets/images/waxingcrescenticon.png");
+                    moonIcon.setAttribute("alt", "Waxing Crescent Moon");
                     console.log(pFive)
                     moonDiv.appendChild(pFive)
                     moonDiv.appendChild(moonIcon);
                 }
 
-                else if(moonPhase == .25) {
+                else if (moonPhase == .25) {
                     pFive.textContent = "Moon Phase: " + "First Quarter Moon";
-                    moonIcon.setAttribute("src", "./assets/images/firstquartericon.png"); 
-                    moonIcon.setAttribute("alt", "First Quarter moon");
+                    moonIcon.setAttribute("src", "./assets/images/firstquartericon.png");
+                    moonIcon.setAttribute("alt", "First Quarter Moon");
                     console.log(pFive)
                     moonDiv.appendChild(pFive)
                     moonDiv.appendChild(moonicon);
@@ -160,7 +226,7 @@ function getMoreCityDetails(Lat, Lon) {
 
                 else if (moonPhase > .25 && moonPhase < .50) {
                     pFive.textContent = "Moon Phase: " + "Waxing Gibbous"
-                    moonIcon.setAttribute("src", "./assets/images/waxinggibousicon.png"); 
+                    moonIcon.setAttribute("src", "./assets/images/waxinggibousicon.png");
                     moonIcon.setAttribute("alt", "Waxing Gibbous Moon");
                     console.log(pFive)
                     moonDiv.appendChild(pFive)
@@ -169,44 +235,44 @@ function getMoreCityDetails(Lat, Lon) {
 
                 else if (moonPhase == .50) {
                     pFive.textContent = "Moon Phase: " + "First Full Moon"
-                    moonIcon.setAttribute("src", "./assets/images/fullmoonicon.png"); 
+                    moonIcon.setAttribute("src", "./assets/images/fullmoonicon.png");
                     moonIcon.setAttribute("alt", "First Full Moon");
                     console.log(pFive)
                     moonDiv.appendChild(pFive)
                     moonDiv.appendChild(moonIcon);
                 }
 
-                else if(moonPhase > .50 && moonPhase < .75) {
+                else if (moonPhase > .50 && moonPhase < .75) {
                     pFive.textContent = "Moon Phase: " + "Waning Gibbous";
-                    moonIcon.setAttribute("src", "./assets/images/waninggibousicon.png"); 
+                    moonIcon.setAttribute("src", "./assets/images/waninggibousicon.png");
                     moonIcon.setAttribute("alt", "Waning Gibbous Moon");
                     console.log(pFive)
                     moonDiv.appendChild(pFive)
                     moonDiv.appendChild(moonIcon);
                 }
 
-                else if(moonPhase == .75){
+                else if (moonPhase == .75) {
                     pFive.textContent = "Moon Phase: " + "Last Quarter Moon";
-                    moonIcon.setAttribute("src", "./assets/images/lastquartericon.png"); 
+                    moonIcon.setAttribute("src", "./assets/images/lastquartericon.png");
                     moonIcon.setAttribute("alt", "Last Quarter Moon");
                     console.log(pFive)
                     moonDiv.appendChild(pFive)
                     moonDiv.appendChild(moonIcon);
                 }
 
-                else if( moonPhase > .75 && moonPhase < 1 ) {
+                else if (moonPhase > .75 && moonPhase < 1) {
                     pFive.textContent = "Moon Phase: " + "Waning Crescent";
-                    moonIcon.setAttribute("src", "./assets/images/waningcrescenticon.png"); 
+                    moonIcon.setAttribute("src", "./assets/images/waningcrescenticon.png");
                     moonIcon.setAttribute("alt", "Waning Crescent Moon");
                     console.log(pFive)
                     moonDiv.appendChild(pFive)
                     moonDiv.appendChild(moonIcon);
                 }
 
-                else if( moonPhase == 0 || moonPhase == 1){
+                else if (moonPhase == 0 || moonPhase == 1) {
                     pFive.textContent = "Moon Phase: " + "New Moon";
-                    moonIcon.setAttribute("src", "./assets/images/newmoonicon.png"); 
-                    moonIcon.setAttribute("alt", "New Moon");
+                    moonIcon.setAttribute("src", "./assets/images/newmoonicon.png");
+                    moonIcon.setAttribute("alt", "New Moon Moon");
                     console.log(pFive)
                     moonDiv.appendChild(pFive);
                     moonDiv.appendChild(moonIcon);
@@ -230,6 +296,7 @@ function getPlanetInfo(latVar, lonVar) {
                 console.log(planets)
                 planetDiv = document.createElement("div")
                 sunMoonDiv.appendChild(planetDiv)
+                planetDiv.setAttribute("style", "border: 3px solid black;")
 
                 for (i = 0; i < planets.length; i++) {
                     let planetName = planets[i].name
@@ -265,51 +332,11 @@ subBtn.addEventListener("click", function (event) {
     getCityDetails(cityName)
 })
 
-function findIss() {
-    var issApi = "http://api.open-notify.org/iss-now.json";
-    // make the request 
-    fetch(issApi).then(function (response) {
-        if (response.ok) {
-            //log the data
-            response.json().then(function (data) {
-                issLat = data.iss_position.latitude;
-                issLon = data.iss_position.longitude;
-                console.log(data)
-                console.log(issLat)
-                console.log(issLon)
-            })
-                .then(function (data) {
-                    mapMaker()
-                });
-        }
-    });
-};
-
 function mapMaker() {
-    //Clear Map
-
-    //create map
-
-    var map = L.map('map').setView([latitude, longitude], 13);
-
-    // add layers to the map
-    L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
-        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-        minZoom: 1,
-        maxZoom: 1,
-        id: 'mapbox/streets-v11',
-        tileSize: 512,
-        zoomOffset: -1,
-        accessToken: 'pk.eyJ1IjoiY2hyaXMtdGlqZXJpbmEiLCJhIjoiY2t3eTMzeDQyMGg4djJ1cXZhbTBybnh0MCJ9.8p4s1rao5HyWsSbPOO8slg'
-    }).addTo(map);
-
-
-    // put marker on home position
-    L.marker([latitude, longitude]).addTo(map);
-
-    // put iss marker
-    L.marker([issLat, issLon]).addTo(map);
-
+    if (homeMarker) {
+        map.removeLayer(homeMarker);
+    }
+    homeMarker = L.marker([latitude, longitude], { icon: homeIcon }).addTo(map);
 }
 
 // On click of button, run the geo location function
@@ -339,5 +366,5 @@ function showPosition(position) {
     latitude = position.coords.latitude;
     longitude = position.coords.longitude;
     getMoreCityDetails(latitude, longitude)
-    findIss();
+    mapMaker();
 }
