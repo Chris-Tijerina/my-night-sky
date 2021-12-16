@@ -175,7 +175,6 @@ function getMoreCityDetails(Lat, Lon) {
                 let moonSetShowTime = moonSetHour + ":" + moonSetMinute
 
                 weatherDiv = document.createElement("div")
-                weatherDiv.setAttribute("style", "border: 3px solid red")
                 weatherInfoDiv.appendChild(weatherDiv)
 
                 iconImg = document.createElement("img")
@@ -315,7 +314,6 @@ function getPlanetInfo(latVar, lonVar) {
                 console.log(planets)
                 planetDiv = document.createElement("div")
                 sunMoonDiv.appendChild(planetDiv)
-                planetDiv.setAttribute("style", "border: 3px solid black;")
 
                 for (i = 0; i < planets.length; i++) {
                     let planetName = planets[i].name
