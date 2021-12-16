@@ -91,7 +91,6 @@ function getMoreCityDetails(Lat, Lon) {
                 let moonSetShowTime = moonSetHour + ":" + moonSetMinute
 
                 weatherDiv = document.createElement("div")
-                weatherDiv.setAttribute("style", "border: 3px solid red")
                 weatherInfoDiv.appendChild(weatherDiv)
 
                 iconImg = document.createElement("img")
@@ -207,7 +206,7 @@ function getMoreCityDetails(Lat, Lon) {
                 else if( moonPhase == 0 || moonPhase == 1){
                     pFive.textContent = "Moon Phase: " + "New Moon";
                     moonIcon.setAttribute("src", "./assets/images/newmoonicon.png"); 
-                    moonIcon.setAttribute("alt", "New Moon Moon");
+                    moonIcon.setAttribute("alt", "New Moon");
                     console.log(pFive)
                     moonDiv.appendChild(pFive);
                     moonDiv.appendChild(moonIcon);
@@ -231,7 +230,6 @@ function getPlanetInfo(latVar, lonVar) {
                 console.log(planets)
                 planetDiv = document.createElement("div")
                 sunMoonDiv.appendChild(planetDiv)
-                planetDiv.setAttribute("style", "border: 3px solid black;")
 
                 for (i = 0; i < planets.length; i++) {
                     let planetName = planets[i].name
