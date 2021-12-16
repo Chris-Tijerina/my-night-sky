@@ -82,9 +82,13 @@ form label{
 }
 
 footer {
-    
-    height: 1px;
-    
+    height: 1px; 
+}
+
+/* resizes the moon icon */
+.moonIcon{
+    height: 212px;
+    width: 212px;
 }
 
 @media (max-width: 100px) {
