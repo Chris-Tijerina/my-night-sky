@@ -11,18 +11,18 @@
 </head>
 <body>
     <header>    
-        <section class="hero is-large">
+        <section class="hero">
         <div class="hero-body">
             <h1 class="title">
-            My Night Sky
-            </h1>
+            <img src="https://see.fontimg.com/api/renderfont4/ywxm2/eyJyIjoiZnMiLCJoIjo2NSwidyI6MTAwMCwiZnMiOjY1LCJmZ2MiOiIjRjJGMkYyIiwiYmdjIjoiI0ZGRkZGRiIsInQiOjF9/TXkgTmlnaHQgU2t5/nelipotvp-demo-style-2.png">
         </div>
         </section>
     </header>
 
     <main class="columns">
         <div class="column">
-            <p class="description bd-notification is-info">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Exercitationem nam est distinctio similique! Autem rem ex magni voluptatem libero quisquam possimus deleniti voluptates dolores, commodi quam delectus modi maiores veniam.</p>
+            <p class="description bd-notification is-info">Ever wanted to view the ISS but didn't know when you could or if the weather was just right? Now you can! By using your geolocation or searching a city, 
+                you can determine the location of the ISS in relation to you as well as the weather conditions and what phase the moon is in!</p>
             <div class="columns">
                 <div class="formCont column is-one-quarter">
                     <div class="infoColumn">
@@ -30,38 +30,36 @@
                             <label for="city-finder">Enter City for Coordinates</label>
                             <input type="text" name="city-finder" id="city-finder" class="form-input">
                             <button type="submit" class="sub-btn" id="sub-btn">Submit</button>
-                            <button type="button" class="geoBtn"> Get my Geolocation</button>
+                            <button type="button" class="geoBtn"> Get My Geolocation</button>
                         </form>
+                    </div>
+                    <div id = "previous-searches">
+
                     </div>
                 </div>
                 <div class="column">
                     <div id="all-the-goodies" class="infoColumn columns is-flex-wrap-wrap">
                         <div id="weatherInfo" class="column is-half">
-                            <!-- john's image class -->
                             <img class="weather-icon">
-                            <h2>Test1</h2>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam minima, doloremque eos assumenda dolor, quisquam quia quis harum aliquam facere pariatur voluptatem at nihil atque omnis sequi beatae sed vel!</p>
                         </div>
-                        <div id="sunMoon" class="column is-half">
-                            <h2>Test2</h2>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam minima, doloremque eos assumenda dolor, quisquam quia quis harum aliquam facere pariatur voluptatem at nihil atque omnis sequi beatae sed vel!</p>
-                        </div>
-                        <div id="moonLocation" class="column is-half">
-                            <h2>Test3</h2>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam minima, doloremque eos assumenda dolor, quisquam quia quis harum aliquam facere pariatur voluptatem at nihil atque omnis sequi beatae sed vel!</p>
-                        </div>
-                        <div id="map" class="ISSLocation column">
-                            <h2>Test4</h2>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam minima, doloremque eos assumenda dolor, quisquam quia quis harum aliquam facere pariatur voluptatem at nihil atque omnis sequi beatae sed vel!</p>
-                        </div>
+                        <div id="sunMoon" class="column is-half"></div>
+                        <div id="moonLocation" class="column is-half"></div>
+                        <div id="map" class="ISSLocation column"></div>
                     </div>
                 </div>
             </div>
         </div>
     </main>
+    <footer class="footer has-background-grey-light">
+        <div class="content has-text-centered is-size-5">
+            <strong>Created by Group 5</strong>
+            <p>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></p>
+        </div>
+      </footer>
+
 
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="crossorigin=""></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="./assets/js/script.js"></script>
+    <script src="assets/js/script.js"></script>
 </body>
 </html>

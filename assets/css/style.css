@@ -1,19 +1,29 @@
 *{
     color: white;
+    font-family: monospace, "Lucida Console", "Courier New";
 }
 
 body{
-    background-color: rgba(126, 118, 118, 0.692);
+    background-color: rgba(134, 133, 133, 0.911);
 }
 
 /* hero space TBD with image*/
 .hero{
-    background-color: black;
+    background-image: url("../images/negative-space-moon-craters.jpg");
     text-align: center;
+    background-position: center;
+    background-size: cover;
+    height: 800px;
+    background-color: rgb(10, 10, 10);
 }
 
 .hero h1{
-    color:rgb(172, 166, 166);
+    display: flex;
+    padding: 0 0 650px 0;
+    position: absolute;
+    top: 50%; 
+    right: 50%;
+    transform: translate(50%,-50%);
 }
 
 /* opening description */
@@ -21,6 +31,7 @@ body{
     text-align: center;
     margin: 20px;
     font-size: 1.3rem;
+    text-shadow: 2px 2px 5px black;
 }
 
 /* containers holding all the info */
@@ -38,6 +49,8 @@ body{
 
 form label{
     font-size: 1.3rem;
+    text-shadow: 2px 2px 5px black;
+
 }
 
 .form-input{
@@ -47,16 +60,39 @@ form label{
     font-size: 14px;
     border-radius: .3rem;
     font-size: 24px;
+    color:rgb(10, 10, 10);
 }
 
-.sub-btn, .geoBtn{
+.sub-btn, .geoBtn, .historyButton{
     margin: 5px 0;
     padding: 6px 5px;
     width: 80%;
+    background-color: rgb(34, 34, 36);
+    border-radius: 4px;
+}
+
+.historyButton{
+    background-color: rgb(102, 102, 102);
 }
 /* end of form container */
 
 #map{
     height: 600px;
     width: 600px;
+}
+
+footer {
+    height: 1px; 
+}
+
+/* resizes the moon icon */
+.moonIcon{
+    height: 212px;
+    width: 212px;
+}
+
+@media (max-width: 100px) {
+    .hero h1 {
+        padding: 0 0 300px 0;
+    }
 }
