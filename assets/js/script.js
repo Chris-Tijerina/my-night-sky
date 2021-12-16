@@ -290,7 +290,7 @@ function getMoreCityDetails(Lat, Lon) {
                 else if (moonPhase == 0 || moonPhase == 1) {
                     pFive.textContent = "Moon Phase: " + "New Moon";
                     moonIcon.setAttribute("src", "./assets/images/newmoonicon.png");
-                    moonIcon.setAttribute("alt", "New Moon Moon");
+                    moonIcon.setAttribute("alt", "New Moon");
                     console.log(pFive)
                     moonDiv.appendChild(pFive);
                     moonDiv.appendChild(moonIcon);
