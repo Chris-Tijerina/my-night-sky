@@ -180,7 +180,7 @@ function getMoreCityDetails(Lat, Lon) {
                 else if(moonPhase > .50 && moonPhase < .75) {
                     pFive.textContent = "Moon Phase: " + "Waning Gibbous";
                     moonIcon.setAttribute("src", "./assets/images/waninggibousicon.png"); 
-                    moonIcon.setAttribute("alt", "Waning Gibbous Moon");
+                    moonIcon.setAttribute("alt", "Waning Gibous moon");
                     console.log(pFive)
                     moonDiv.appendChild(pFive)
                     moonDiv.appendChild(moonIcon);
