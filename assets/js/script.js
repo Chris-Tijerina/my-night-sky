@@ -153,7 +153,7 @@ function getMoreCityDetails(Lat, Lon) {
 
                 //Icon
                 let weatherIcon = moreData.current.weather[0].icon
-                let iconUrl = "http://openweathermap.org/img/wn/" + weatherIcon + ".png";
+                let iconUrl = "https://openweathermap.org/img/wn/" + weatherIcon + ".png";
 
                 //Moon Phase
                 let moonPhase = moreData.daily[0].moon_phase
@@ -226,7 +226,11 @@ function getMoreCityDetails(Lat, Lon) {
                 moonIcon.className = 'moonIcon';
                 if (moonPhase > 0 && moonPhase < .25) {
                     pFive.textContent = "Moon Phase: " + "Waxing Crescent";
-                    moonIcon.setAttribute("src", "./assets/images/waxingcrescenticon.png");
+
+                    
+
+                    moonIcon.setAttribute("src", "./assets/images/waxingcrescenticon.png"); 
+
                     moonIcon.setAttribute("alt", "Waxing Crescent Moon");
                     console.log(pFive)
                     moonDiv.appendChild(pFive)
@@ -235,7 +239,11 @@ function getMoreCityDetails(Lat, Lon) {
 
                 else if (moonPhase == .25) {
                     pFive.textContent = "Moon Phase: " + "First Quarter Moon";
-                    moonIcon.setAttribute("src", "./assets/images/firstquartericon.png");
+
+                    
+
+                    moonIcon.setAttribute("src", "./assets/images/firstquartericon.png"); 
+
                     moonIcon.setAttribute("alt", "First Quarter Moon");
                     console.log(pFive)
                     moonDiv.appendChild(pFive)
@@ -262,7 +270,11 @@ function getMoreCityDetails(Lat, Lon) {
 
                 else if (moonPhase > .50 && moonPhase < .75) {
                     pFive.textContent = "Moon Phase: " + "Waning Gibbous";
-                    moonIcon.setAttribute("src", "./assets/images/waninggibousicon.png");
+
+                    
+
+                    moonIcon.setAttribute("src", "./assets/images/waninggibousicon.png"); 
+
                     moonIcon.setAttribute("alt", "Waning Gibbous Moon");
                     console.log(pFive)
                     moonDiv.appendChild(pFive)
@@ -271,8 +283,12 @@ function getMoreCityDetails(Lat, Lon) {
 
                 else if (moonPhase == .75) {
                     pFive.textContent = "Moon Phase: " + "Last Quarter Moon";
-                    moonIcon.setAttribute("src", "./assets/images/lastquartericon.png");
-                    moonIcon.setAttribute("alt", "Last Quarter Moon");
+
+                    
+
+                    moonIcon.setAttribute("src", "./assets/images/lastquartericon.png"); 
+                    moonIcon.setAttribute("alt", "Last Quarter moon");
+
                     console.log(pFive)
                     moonDiv.appendChild(pFive)
                     moonDiv.appendChild(moonIcon);
@@ -280,7 +296,11 @@ function getMoreCityDetails(Lat, Lon) {
 
                 else if (moonPhase > .75 && moonPhase < 1) {
                     pFive.textContent = "Moon Phase: " + "Waning Crescent";
-                    moonIcon.setAttribute("src", "./assets/images/waningcrescenticon.png");
+
+                   
+
+                    moonIcon.setAttribute("src", "./assets/images/waningcrescenticon.png"); 
+
                     moonIcon.setAttribute("alt", "Waning Crescent Moon");
                     console.log(pFive)
                     moonDiv.appendChild(pFive)
@@ -289,7 +309,11 @@ function getMoreCityDetails(Lat, Lon) {
 
                 else if (moonPhase == 0 || moonPhase == 1) {
                     pFive.textContent = "Moon Phase: " + "New Moon";
-                    moonIcon.setAttribute("src", "./assets/images/newmoonicon.png");
+
+                    
+
+                    moonIcon.setAttribute("src", "./assets/images/newmoonicon.png"); 
+
                     moonIcon.setAttribute("alt", "New Moon");
                     console.log(pFive)
                     moonDiv.appendChild(pFive);
