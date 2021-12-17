@@ -1,9 +1,9 @@
 ## My Night Sky
 
 
-##Screenshot
+## Screenshot
 
-[Screenshot](https://user-images.githubusercontent.com/91796423/146468045-0919a26e-8839-4b4c-97cb-ba895a9da699.png)
+![Screenshot](https://user-images.githubusercontent.com/91796423/146468045-0919a26e-8839-4b4c-97cb-ba895a9da699.png)
 
 
 ## Purpose
