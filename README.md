@@ -1,11 +1,5 @@
 ## My Night Sky
 
-
-## Screenshot
-
-![Screenshot](https://user-images.githubusercontent.com/91796423/146468045-0919a26e-8839-4b4c-97cb-ba895a9da699.png)
-
-
 ## Purpose
 
 AS AN astronomy student
@@ -13,11 +7,17 @@ I WANT to know the viewing conditions when the sun goes down
 SO THAT I can determine what I can see in the sky
 
 
+## Screenshot
+
+![Screenshot](https://user-images.githubusercontent.com/91796423/155901786-98bc7292-6ea1-4ca5-92e6-b34f4dc5ff0e.png)
+
+
+
 ## Built With
 
 * HTML
 * CSS
-    - [Bulma](https://bulma.io/)
+* Bulma
 * Javascript 
 
 
